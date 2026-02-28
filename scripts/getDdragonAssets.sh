@@ -9,7 +9,7 @@ latestVersion="$(echo "${versionsJson}" | jq -r '.[0]')"
 
 echo "Latest version: ${latestVersion}"
 
-targetDir="src/assets/ddragon"
+targetDir="public/assets/ddragon"
 versionTxt="${targetDir}/version.txt"
 
 if [ -f "$versionTxt" ]; then
