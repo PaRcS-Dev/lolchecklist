@@ -44,7 +44,14 @@ tar -xzf "${tgzFile}" -C "${tempExtractDir}" "${latestVersion}/data/en_US/champi
 rm -f "${tgzFile}"
 
 if [ -d "${tempExtractDir}/img/champion/tiles" ]; then
-    cp -f "${tempExtractDir}/img/champion/tiles/"*_0.jpg "${tilesDir}/"
+  for FilePath in "${tempExtractDir}/img/champion/tiles/"*_0.jpg; do
+    [ -e "$FilePath" ] || continue
+
+    FileName="$(basename "$FilePath")"
+    LowerCaseName="${FileName,,}"
+
+    cp -f "$FilePath" "${tilesDir}/${LowerCaseName}"
+  done
 fi
 
 cp -f "${tempExtractDir}/${latestVersion}/data/en_US/champion.json" "${targetDir}/champion.json"
