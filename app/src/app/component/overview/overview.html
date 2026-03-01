@@ -1,0 +1,103 @@
+<div class="page">
+    <div class="controls">
+
+        <div class="search-bar">
+            <div class="search-input-wrapper">
+            <input
+                type="text"
+                [formControl]="searchControl"
+                placeholder="Search Champion"
+                class="search-input"
+                maxlength="20"
+            />
+
+            <button
+                type="button"
+                class="clear-button"
+                aria-label="Clear search"
+                [class.isVisible]="searchControl.value.length > 0"
+                (click)="clearSearch()"
+            >
+                ×
+            </button>
+            </div>
+        </div>
+
+        <div class="radio-group">
+        <label>
+            <input type="radio" [value]="SelectionFilterEnum.All" [formControl]="selectionFilterControl" />
+            All
+        </label>
+
+        <label>
+            <input type="radio" [value]="SelectionFilterEnum.Selected" [formControl]="selectionFilterControl" />
+            All selected
+        </label>
+
+        <label>
+            <input type="radio" [value]="SelectionFilterEnum.NonSelected" [formControl]="selectionFilterControl" />
+            All non-selected
+        </label>
+        </div>
+
+        <div class="all-selection-group">
+            <input type="button" value="Check All Filtered" (click)="checkAllFiltered()" />
+            <input type="button" value="Uncheck All Filtered" (click)="unCheckAllFiltered()" />
+        </div>
+
+        <div class="all-selection-group">
+            <input type="button" value="Check All" (click)="checkAll()" />
+            <input type="button" value="Uncheck All" (click)="unCheckAll()" />
+        </div>
+        @if (filteredChampions$ | async; as filteredChampions) {
+            <div class="selection-progress">
+                <div class="progress-text">
+                    {{ filteredChampions.filter(c => (c.key in this.selectedChampions)).length }} / {{ filteredChampions.length }}
+                </div>
+
+                <div class="progress-bar">
+                    <div
+                    class="progress-fill"
+                    [style.width.%]="filteredChampions.length ? (filteredChampions.filter(c => (c.key in this.selectedChampions)).length / filteredChampions.length) * 100 : 0"
+                    ></div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+    <div class="champion-grid">
+        @for (champ of filteredChampions$ | async; track champ.key) {
+            <app-champion-tab
+            [champion]="champ"
+            [IsSelected]="isChampionSelected(champ.key)"
+            (ChampionClicked)="toggleChampion(champ.key)"
+            ></app-champion-tab>
+        }
+    </div>
+</div>
+
+
+
+<!--
+TODO:
+-  zwei Boxen (mit abgerundeter Border): Links (Suche/Filter) | Rechts (Speichern/Laden)
+    - [UI] Speichern/Laden
+        - Laden
+            - Dropdown mit gespeicherten
+            - Btn Load
+            - Btn Delete
+            - Btn Import
+        - Speichern
+            - Name
+            - Checkbox Auto-Save
+            - Btn Save
+            - Btn Export
+        - Teilen
+            - Link kopieren
+    - [Logik] Speichern/Laden
+        - Speichern in Browser / Dateiexplorer
+            - Json mit den keys, ob slected und auch wann selected
+- Aktuellen Link
+    - beinhaltet alle keys von den ausgewählten
+-->

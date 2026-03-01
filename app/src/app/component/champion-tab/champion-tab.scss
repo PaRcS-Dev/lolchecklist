@@ -1,0 +1,36 @@
+.champion-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+
+    border-radius: 16px;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.champion-card:hover {
+    transform: translateY(-3px);
+}
+
+/* 🔹 Selektierter Zustand */
+.champion-card.selected {
+    background-color: #d4f8d4;   /* leicht grün */
+    border-color: #6bcf6b;
+}
+
+.champion-name {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.champion-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+}

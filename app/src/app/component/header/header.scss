@@ -1,0 +1,29 @@
+.champion-header {
+  text-align: center;
+  padding: 0.5rem 1.5rem 2.0rem;
+  max-width: 900px;
+  margin: 0 auto;
+
+  .title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1f2937;
+    letter-spacing: 0.5px;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    color: #4b5563;
+  }
+
+  .disclaimer {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #6b7280;
+    max-width: 750px;
+    margin: 0 auto;
+  }
+}

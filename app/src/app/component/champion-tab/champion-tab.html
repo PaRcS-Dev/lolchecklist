@@ -1,0 +1,4 @@
+<div class="champion-card" [class.selected]="IsSelected" (click)="OnCardClick()">
+    <div class="champion-name">{{ champion.name }}</div>
+    <img class="champion-image" [src]="champion.imagePath" [alt]="champion.name"/>
+</div>
